@@ -55,7 +55,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNumberFactRepository(db: NumberFactDatabase): NumberFactSavedRepository{
+    fun provideNumberSavedFactRepository(db: NumberFactDatabase): NumberFactSavedRepository{
         return NumberFactSavedRepositoryImpl(db.numberFactDao)
     }
 
