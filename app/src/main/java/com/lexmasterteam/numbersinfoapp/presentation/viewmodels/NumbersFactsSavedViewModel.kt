@@ -12,10 +12,7 @@ import com.lexmasterteam.numbersinfoapp.domain.use_case.internal.NumbersFactUseC
 import com.lexmasterteam.numbersinfoapp.presentation.states.NumberfactSavedState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
 import java.time.Duration
 import javax.inject.Inject
 import kotlin.time.ExperimentalTime
@@ -26,8 +23,9 @@ import kotlin.time.seconds
 class NumbersFactsSavedViewModel @Inject constructor(
     private val numbersFactUseCases: NumbersFactUseCases
 ): ViewModel() {
-    private val _state = mutableStateOf(NumberfactSavedState())
-    val state:State<NumberfactSavedState> = _state
+    //private val _state = mutableStateOf(NumberfactSavedState())
+    private val _state = MutableStateFlow(NumberfactSavedState())
+    val state:MutableStateFlow<NumberfactSavedState> = _state
 
 
 
@@ -53,7 +51,7 @@ class NumbersFactsSavedViewModel @Inject constructor(
     }
 
 
-    fun observeState(): LiveData<NumberfactSavedState>{
+    fun observeState(): StateFlow<NumberfactSavedState> {
         return state
     }
 

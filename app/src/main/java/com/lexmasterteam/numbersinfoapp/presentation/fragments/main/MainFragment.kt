@@ -41,11 +41,13 @@ class MainFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
 
-        // pogłówkuj nad tym jak tu obserwera dodać (może zmienić gdzieś listę na mutable list?)
-        adapter.setData(viewModelDB.state.value.facts)
+
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModelDB.observeState().collect{
+            viewModelDB.observeState().collect(){
+
+                // pogłówkuj nad tym jak tu obserwera dodać (może zmienić gdzieś listę na mutable list?)
+                adapter.setData(viewModelDB.state.value.facts)
 
             }
         }
