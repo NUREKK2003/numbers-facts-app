@@ -8,7 +8,7 @@ class AddNumberFact(
     private val repository: NumberFactSavedRepository
 ) {
     @Throws(InvalidNumberFactException::class)
-    suspend fun invoke(fact: SavedNumberFact){
+    suspend operator fun invoke(fact: SavedNumberFact){
         repository.insertNumberFact(fact)
     }
 }

@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.lexmasterteam.numbersinfoapp">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
+        android:usesCleartextTraffic="true"
         android:name=".NumberFactApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"

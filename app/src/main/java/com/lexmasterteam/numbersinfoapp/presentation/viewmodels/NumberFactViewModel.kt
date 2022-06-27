@@ -1,5 +1,6 @@
 package com.lexmasterteam.numbersinfoapp.presentation.viewmodels
 
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,15 +18,17 @@ class NumberFactViewModel @Inject constructor(
 ): ViewModel(){
     private val _state = mutableStateOf(NumberFactState())
 
+    val state: State<NumberFactState> = _state
+
     init {
         getNumberFact()
     }
 
-    private fun getNumberFact() {
+    fun getNumberFact() {
         getNumberFactUseCase().onEach { result ->
             when(result){
                 is Resource.Succes ->{
-                    _state.value = NumberFactState(numberFact = result.data)
+                    _state.value = NumberFactState(numberFact = result.data, isLoading = false)
                 }
                 is Resource.Error ->{
                     _state.value = NumberFactState(error = result.message ?: "An unexpected error occured")

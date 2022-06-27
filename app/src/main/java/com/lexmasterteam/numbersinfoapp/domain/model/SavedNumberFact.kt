@@ -5,9 +5,9 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class SavedNumberFact(
-    val number: Int,
-    val fact: String,
-    @PrimaryKey val id: Int? = null
+    var number: Int,
+    var fact: String,
+    @PrimaryKey var id: Int? = null
 )
 
 class InvalidNumberFactException(message: String): Exception(message)
