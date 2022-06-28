@@ -1,11 +1,13 @@
 package com.lexmasterteam.numbersinfoapp.presentation.fragments.main
 
+import android.app.Application
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,7 +48,7 @@ class MainFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModelDB.observeState().collect(){
 
-                // pogłówkuj nad tym jak tu obserwera dodać (może zmienić gdzieś listę na mutable list?)
+                // pogłówkuj nad tym jak tu obserwera dodać (może zmienić gdzieś listę na mutable list?) // edit już ogarnięte
                 adapter.setData(viewModelDB.state.value.facts)
 
             }
@@ -75,6 +77,9 @@ class MainFragment : Fragment() {
                         viewModelDB.addNumberFact(savedFact)
                     }
 
+                }
+                if (savedFact == null || savedFact.number.equals(-1)){
+                    Toast.makeText(this@MainFragment.context,"Please, wait a while before next click!",Toast.LENGTH_SHORT).show()
                 }
                 adapter.setData(viewModelDB.state.value.facts)
                 viewModelApi.getNumberFact()
